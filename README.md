@@ -19,7 +19,8 @@ ERROR: no singularity found, please make sure you have singularity in your $PATH
 ```
 
 Installed singularity using ```sudo apt-get install singularity```
-After installing singularity the above previous error was gone. 
+
+After installing singularity the previous error was gone. 
 
 Now facing the following error:
 ```
