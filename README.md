@@ -99,14 +99,14 @@ ERROR: no singularity image found
   Many HEP tools (e.g. CMS Combine, CRAB, or CMSSW utilities) still reference the command singularity for backward compatibility.
   However, the original Singularity project has since split into two separate branches:
 
-  | Project           | Maintainer       | Current Binary | Status                              |
-  | ----------------- | ---------------- | -------------- | ----------------------------------- |
-  | **Apptainer**     | Linux Foundation | `apptainer`    | ✅ Official open-source continuation |
-  | **SingularityCE** | Sylabs, Inc.     | `singularity`  | ⚙️ Commercial/community fork        |
+    | Project           | Maintainer       | Current Binary | Status                              |
+    | ----------------- | ---------------- | -------------- | ----------------------------------- |
+    | **Apptainer**     | Linux Foundation | `apptainer`    | ✅ Official open-source continuation |
+    | **SingularityCE** | Sylabs, Inc.     | `singularity`  | ⚙️ Commercial/community fork        |
 
-  So, when a script reports an error mentioning Singularity, it doesn’t necessarily mean that you need the older “SingularityCE” package — it simply expects a compatible container runtime (which Apptainer provides).
+    So, when a script reports an error mentioning Singularity, it doesn’t necessarily mean that you need the older “SingularityCE” package — it simply expects a compatible container runtime (which Apptainer provides).
 
-3. Why Apptainer is recommended
+2. Why Apptainer is recommended
   * Apptainer is the actively maintained and fully open-source successor to Singularity, now under the Linux Foundation.
   * SingularityCE is a commercial/community fork maintained by Sylabs.
   * Both provide nearly identical command-line interfaces, so you can safely alias:
