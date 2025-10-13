@@ -96,18 +96,20 @@ ERROR: no singularity image found
 **TL;DR -> The option --force is unavailable in singularity that I installed earlier.** From chatgpt got the following recommendation: 
 
 1. Why the error mentions Singularity
-Many HEP tools (e.g. CMS Combine, CRAB, or CMSSW utilities) still reference the command singularity for backward compatibility.
-However, the original Singularity project has since split into two separate branches:
-| Project           | Maintainer       | Current Binary | Status                              |
-| ----------------- | ---------------- | -------------- | ----------------------------------- |
-| **Apptainer**     | Linux Foundation | `apptainer`    | ✅ Official open-source continuation |
-| **SingularityCE** | Sylabs, Inc.     | `singularity`  | ⚙️ Commercial/community fork        |
-So, when a script reports an error mentioning Singularity, it doesn’t necessarily mean that you need the older “SingularityCE” package — it simply expects a compatible container runtime (which Apptainer provides).
+  Many HEP tools (e.g. CMS Combine, CRAB, or CMSSW utilities) still reference the command singularity for backward compatibility.
+  However, the original Singularity project has since split into two separate branches:
 
-2. Why Apptainer is recommended
-* Apptainer is the actively maintained and fully open-source successor to Singularity, now under the Linux Foundation.
-* SingularityCE is a commercial/community fork maintained by Sylabs.
-* Both provide nearly identical command-line interfaces, so you can safely alias:
+  | Project           | Maintainer       | Current Binary | Status                              |
+  | ----------------- | ---------------- | -------------- | ----------------------------------- |
+  | **Apptainer**     | Linux Foundation | `apptainer`    | ✅ Official open-source continuation |
+  | **SingularityCE** | Sylabs, Inc.     | `singularity`  | ⚙️ Commercial/community fork        |
+
+  So, when a script reports an error mentioning Singularity, it doesn’t necessarily mean that you need the older “SingularityCE” package — it simply expects a compatible container runtime (which Apptainer provides).
+
+3. Why Apptainer is recommended
+  * Apptainer is the actively maintained and fully open-source successor to Singularity, now under the Linux Foundation.
+  * SingularityCE is a commercial/community fork maintained by Sylabs.
+  * Both provide nearly identical command-line interfaces, so you can safely alias:
   ```ln -s $(which apptainer) /usr/local/bin/singularity```
   to ensure full compatibility with tools that still expect the old singularity command name.
 **TL;DR -> Installing Apptainer ensures compatibility with modern HEP software while avoiding legacy issues.**
