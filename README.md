@@ -2,6 +2,7 @@
 
 ## Setting up the framework
 ```curl --location https://get.epic-eic.org | bash```
+
 The above command gave the following error:
 ```ERROR: no singularity found, please make sure you have singularity in your $PATH```
 Full output after the command:
