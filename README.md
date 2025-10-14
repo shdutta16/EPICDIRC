@@ -118,3 +118,16 @@ ERROR: no singularity image found
   * Remove singularity: ```sudo apt-get remove singularity``` 
   * Add the Apptainer repository: ```sudo add-apt-repository ppa:apptainer/ppa``` (this was needed since apptainer wasn't available in the default Ubuntu repositories) 
   * Install Apptainer: ```sudo apt-get install apptainer```
+
+The command gets stuck at a point while downloading ```eic_xl```. It only goes looking for an alternative when ```Ctrl+C``` is pressed.
+```
+Downloading container from: https://eicweb.phy.anl.gov/api/v4/projects/290/jobs/artifacts/master/raw/build/eic_xl.sif?job=eic_xl:singularity:nightly
+Destination: /tmp/ci-fq0YQKk5vT/lib/eic_xl-nightly.sif
+^[[A^[[A^[[A
+
+
+
+^CWARNING: failed to retrieve container artifact
+Attempting alternative download from docker registry
+Executing: singularity pull --force /tmp/ci-fq0YQKk5vT/lib/eic_xl-nightly.sif docker://eicweb/eic_xl:nightly
+```
