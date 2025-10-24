@@ -169,9 +169,9 @@
   **Installing DD4HEP**
   Got the following error while trying to run ```cmake -DDD4HEP_USE_GEANT4=ON -DD4HEP_IGNORE_GEANT4_TLS=True -DBoost_NO_BOOST_CMAKE=ON -DBUILD_TESTING=ON -DROOT_DIR=$ROOTSYS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/shubhamdutta/Applications/Package_install/DD4hep-1.32.1 /home/shubhamdutta/Applications/Package_source/DD4hep-1.32.1```
   ```
-    CMake Error at cmake/DD4hepBuild.cmake:842 (MESSAGE):
+  CMake Error at cmake/DD4hepBuild.cmake:842 (MESSAGE):
     Geant4 was built with initial-exec, DD4hep requires 'global-dynamic'!
     Ignore this ERROR with DD4HEP_IGNORE_GEANT4_TLS=True
   Call Stack (most recent call first):
-  CMakeLists.txt:164 (DD4HEP_SETUP_GEANT4_TARGETS)
+    CMakeLists.txt:164 (DD4HEP_SETUP_GEANT4_TARGETS)
   ```
