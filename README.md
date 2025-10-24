@@ -164,9 +164,11 @@
   Checked DD4HEP installation requirements, it needs Boost (>=1.56)
 
   **Installing Boost**
+
   Boost is already installed, version 1.71
 
   **Installing DD4HEP**
+
   Got the following error while trying to run ```cmake -DDD4HEP_USE_GEANT4=ON -DD4HEP_IGNORE_GEANT4_TLS=True -DBoost_NO_BOOST_CMAKE=ON -DBUILD_TESTING=ON -DROOT_DIR=$ROOTSYS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/shubhamdutta/Applications/Package_install/DD4hep-1.32.1 /home/shubhamdutta/Applications/Package_source/DD4hep-1.32.1```
   ```
   CMake Error at cmake/DD4hepBuild.cmake:842 (MESSAGE):
