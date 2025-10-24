@@ -167,6 +167,106 @@
 
   Boost is already installed, version 1.71
 
+  **Installing EDM4hep**
+
+  EDM4hep requires podio
+
+  **Installing podio**
+
+  Got the following error while trying to run ```cmake -DCMAKE_INSTALL_PREFIX=/home/shubhamdutta/Applications/Package_install/podio /home/shubhamdutta/Applications/Package_source/podio```
+  ```
+  CMake Error at CMakeLists.txt:115 (message):
+  You are trying to build podio against a version of ROOT that has not been
+  built with a sufficient c++ standard.  podio requires c++20 or higher
+  ```
+  Tried building the exisiting Root (v6.28.06) with C++20 by running: ```cmake -DCMAKE_INSTALL_PREFIX="/home/shubhamdutta/Applications/Package_install/root-6.28.06" -DGSL_CONFIG_EXECUTABLE="/home/shubhamdutta/Applications/Package_install/gsl-2.7/bin/gsl-config" -DGSL_DIR="/home/shubhamdutta/Applications/Package_install/gsl-2.7" -Dbuiltin_gsl="ON" -Dgdml="ON" -Dmathmore="ON" -Dpythia8="ON" -Droofit="ON" -DCMAKE_CXX_STANDARD=20 /home/shubhamdutta/Applications/Package_source/root_v6.28.06.source/root-6.28.06```
+  Got the following error (only small excerpt shown, rest is similar):
+  ```
+  /home/shubhamdutta/Applications/Package_build/root-6.28.06/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+  input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+  #include <new>
+         ^
+  Warning in cling::IncrementalParser::CheckABICompatibility():
+    Failed to extract C++ standard library version.
+  While building module 'Core':
+  While building module 'Cling_Runtime' imported from input_line_2:1:
+  While building module 'Cling_Runtime_Extra' imported from /home/shubhamdutta/Applications/Package_build/root-6.28.06/etc/cling/Interpreter/RuntimeUniverse.h:27:
+  /home/shubhamdutta/Applications/Package_build/root-6.28.06/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+  /home/shubhamdutta/Applications/Package_build/root-6.28.06/etc/cling/Interpreter/DynamicExprInfo.h:13:10: note: submodule of top-level module 'std' implicitly imported here
+  #include <string>
+         ^
+  /home/shubhamdutta/Applications/Package_build/root-6.28.06/etc/cling/Interpreter/DynamicExprInfo.h:40:7: error: use of undeclared identifier 'std'
+      std::string m_Result;
+      ^
+  While building module 'Core':
+  While building module 'Cling_Runtime' imported from input_line_2:1:
+  While building module 'Cling_Runtime_Extra' imported from /home/shubhamdutta/Applications/Package_build/root-6.28.06/etc/cling/Interpreter/RuntimeUniverse.h:27:
+  /home/shubhamdutta/Applications/Package_build/root-6.28.06/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+  /home/shubhamdutta/Applications/Package_build/root-6.28.06/etc/cling/Interpreter/DynamicLookupLifetimeHandler.h:12:10: note: submodule of top-level module 'std' implicitly imported here
+  #include <string>
+         ^
+  /home/shubhamdutta/Applications/Package_build/root-6.28.06/etc/cling/Interpreter/DynamicLookupLifetimeHandler.h:56:7: error: use of undeclared identifier 'std'
+      std::string m_Type;
+      ^
+  While building module 'Core':
+  While building module 'Cling_Runtime' imported from input_line_2:1:
+  While building module 'Cling_Runtime_Extra' imported from /home/shubhamdutta/Applications/Package_build/root-6.28.06/etc/cling/Interpreter/RuntimeUniverse.h:27:
+  ```
+  **TL;DR -> Root v6.28.06 is incompatible with C++20**
+
+  Building Root v6.36.04: ```cmake -DCMAKE_INSTALL_PREFIX="/home/shubhamdutta/Applications/Package_install/root-6.36.04" -DGSL_CONFIG_EXECUTABLE="/home/shubhamdutta/Applications/Package_install/gsl-2.7/bin/gsl-config" -DGSL_DIR="/home/shubhamdutta/Applications/Package_install/gsl-2.7" -Dbuiltin_gsl="ON" -Dgdml="ON" -Dmathmore="ON" -Dpythia8="ON" -Droofit="ON" -DCMAKE_CXX_STANDARD=20 /home/shubhamdutta/Applications/Package_source/root_v6.36.04.source/root-6.36.04```
+  Got the following warning:
+  ```
+  CMake Warning at cmake/modules/SearchInstalledSoftware.cmake:80 (_find_package):
+  By not providing "FindXRootD.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "XRootD", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "XRootD" with any
+  of the following names:
+
+    XRootDConfig.cmake
+    xrootd-config.cmake
+
+  Add the installation prefix of "XRootD" to CMAKE_PREFIX_PATH or set
+  "XRootD_DIR" to a directory containing one of the above files.  If "XRootD"
+  provides a separate development package or SDK, be sure it has been
+  installed.
+  Call Stack (most recent call first):
+    cmake/modules/SearchInstalledSoftware.cmake:997 (find_package)
+    CMakeLists.txt:287 (include)
+  ```
+   **TL;DR -> XRootD is missing**
+  
+  Installed XRootD without issues.
+
+  There were few more libraries missing, while running cmake to install Root. Installed the missing libraries:
+  ```sudo apt install liblzma-dev libxxhash-dev liblz4-dev libgif-dev libjpeg-dev libtiff-dev libgl2ps-dev libsqlite3-dev```
+
+  CMake was still taking C++17. Solution was to update gcc and g++ to version 11:
+  ```sudo add-apt-repository ppa:ubuntu-toolchain-r/test``` -> Add Ubuntu Toolchain PPA to the repository list
+  ```sudo apt install gcc-11 g++-11```
+  
+  Make CMake use version 11 of gcc and g++:
+  ```
+  export CC=/usr/bin/gcc-11
+  export CXX=/usr/bin/g++-11
+  ```
+
+  ```cmake --build . -- -j$(nproc)```
+  **Root v6.36.04 built sucessfully!**  
+  
+
+  
+
+  
+  
   **Installing DD4HEP**
 
   Got the following error while trying to run ```cmake -DDD4HEP_USE_GEANT4=ON -DD4HEP_IGNORE_GEANT4_TLS=True -DBoost_NO_BOOST_CMAKE=ON -DBUILD_TESTING=ON -DROOT_DIR=$ROOTSYS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/shubhamdutta/Applications/Package_install/DD4hep-1.32.1 /home/shubhamdutta/Applications/Package_source/DD4hep-1.32.1```
