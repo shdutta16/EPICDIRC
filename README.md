@@ -382,3 +382,15 @@
   Call Stack (most recent call first):
     CMakeLists.txt:164 (DD4HEP_SETUP_GEANT4_TARGETS)
   ```
+
+  ```
+  python problem ET.indent
+  ```
+
+  ```
+  root problem with geomViewer
+  ```
+
+  ```
+  pytest error
+  ```
