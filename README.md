@@ -172,12 +172,11 @@
 
   EDM4hep requires podio
 
-  **Installing podio**
-
-  Got the following error while trying to run
+  **Installing Podio**
   ```
   cmake -DCMAKE_INSTALL_PREFIX=/home/shubhamdutta/Applications/Package_install/podio /home/shubhamdutta/Applications/Package_source/podio
   ```
+  Got the following error while trying to run the above:
   ```
   CMake Error at CMakeLists.txt:115 (message):
   You are trying to build podio against a version of ROOT that has not been
@@ -279,10 +278,85 @@
   ```
   **Root v6.36.04 built sucessfully!**  
   
+  ```
+  cmake -DCMAKE_INSTALL_PREFIX=/home/shubhamdutta/Applications/Package_install/podio /home/shubhamdutta/Applications/Package_source/podio
+  ```
+  Tried building podio again, got the following error:
+  ```
+  CMake Error at /home/shubhamdutta/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.27/Modules/FindPackageHandleStandardArgs.cmake:230 (message):
+    Could NOT find Vdt (missing: VDT_INCLUDE_DIR VDT_LIBRARY)
+  Call Stack (most recent call first):
+    /home/shubhamdutta/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.27/Modules/FindPackageHandleStandardArgs.cmake:600 (_FPHSA_FAILURE_MESSAGE)
+    /home/shubhamdutta/Applications/Package_install/root-6.36.04/cmake/modules/FindVdt.cmake:63 (find_package_handle_standard_args)
+    /home/shubhamdutta/.local/lib/python3.8/site-packages/cmake/data/share/cmake-3.27/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)
+    /home/shubhamdutta/Applications/Package_install/root-6.36.04/cmake/ROOTConfig.cmake:168 (find_dependency)
+    CMakeLists.txt:89 (find_package)
+  ```
+  **TL;DR -> VDT is missing**
 
-  
+  Rebuilt Root with ```-Dbuilt-in_vdt="ON"``` and reinstalled.
+  ```
+  cmake -DCMAKE_INSTALL_PREFIX="/home/shubhamdutta/Applications/Package_install/root-6.36.04" -DGSL_CONFIG_EXECUTABLE="/home/shubhamdutta/Applications/Package_install/gsl-2.7/bin/gsl-config" -DGSL_DIR="/home/shubhamdutta/Applications/Package_install/gsl-2.7" -Dbuiltin_gsl="ON" -Dgdml="ON" -Dmathmore="ON" -Dpythia8="ON" -Droofit="ON" -Dbuiltin_vdt="ON" -DCMAKE_CXX_STANDARD=20 /home/shubhamdutta/Applications/Package_source/root_v6.36.04.source/root-6.36.04
+  cmake --build . -j${nproc}
+  cmake --build . install --target
+  ```
 
+  Tried building podio again, got the following warnings:
+  ```
+  CMake Warning at tests/CMakeLists.txt:22 (find_package):
+  By not providing "Findnlohmann_json.cmake" in CMAKE_MODULE_PATH this
+  project has asked CMake to find a package configuration file provided by
+  "nlohmann_json", but CMake did not find one.
+
+  Could not find a package configuration file provided by "nlohmann_json"
+  (requested version 3.10) with any of the following names:
+
+    nlohmann_jsonConfig.cmake
+    nlohmann_json-config.cmake
+
+  Add the installation prefix of "nlohmann_json" to CMAKE_PREFIX_PATH or set
+  "nlohmann_json_DIR" to a directory containing one of the above files.  If
+  "nlohmann_json" provides a separate development package or SDK, be sure it
+  has been installed.
+  ```
+  ```
+  CMake Warning at tests/unittests/CMakeLists.txt:4 (find_package):
+  By not providing "FindCatch2.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "Catch2", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "Catch2" (requested
+  version 3.5.0) with any of the following names:
+
+    Catch2Config.cmake
+    catch2-config.cmake
+
+  Add the installation prefix of "Catch2" to CMAKE_PREFIX_PATH or set
+  "Catch2_DIR" to a directory containing one of the above files.  If "Catch2"
+  provides a separate development package or SDK, be sure it has been
+  installed.
+  ```
+  **TL;DR -> Missing Nlohmann_json and Catch2**
+
+  **Installing Nlohmann_json**
+  ```
+  cd /home/shubhamdutta/Applications/Package_source
+  git clone https://github.com/nlohmann/json.git
+  cd json
+  cmake -DCMAKE_INSTALL_PREFIX=/home/shubhamdutta/Applications/Package_install/nlohmann_json .
+  make -j$(nproc)
+  make install
+  ```
+
+  **Installing Catch2**
+  ```
   
+  ```
+
+  **Installing fmt**
+  ```
+  
+  ```
   
   **Installing DD4HEP**
 
