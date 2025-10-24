@@ -350,12 +350,26 @@
 
   **Installing Catch2**
   ```
-  
+  cd /home/shubhamdutta/Applications/Package_source
+  git clone https://github.com/catchorg/Catch2.git -b v3.5.0
+  mv Catch2 catch2-3.5.0 && cd Catch2
+  cd /home/shubhamdutta/Applications/Package_build
+  mkdir catch2-3.5.0 && cd catch2-3.5.0
+  cmake -DCMAKE_INSTALL_PREFIX=/home/shubhamdutta/Applications/Package_install/catch2-3.5.0 /home/shubhamdutta/Applications/Package_source/catch2-3.5.0
+  make -j$(nproc)
+  sudo make install
   ```
 
   **Installing fmt**
   ```
-  
+  cd /home/shubhamdutta/Applications/Package_source
+  git clone https://github.com/fmtlib/fmt.git -b 9.1.0
+  mv fmt fmt-9.1.0 && cd fmt-9.1.0
+  cd /home/shubhamdutta/Applications/Package_build
+  mkdir fmt-9.1.0 && cd fmt-9.1.0
+  cmake -DCMAKE_INSTALL_PREFIX=/home/shubhamdutta/Applications/Package_install/fmt-9.1.0 /home/shubhamdutta/Applications/Package_source/fmt-9.1.0
+  make -j$(nproc)
+  sudo make install
   ```
   
   **Installing DD4HEP**
