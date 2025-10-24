@@ -138,6 +138,7 @@
 * ```git checkout box_envelope```
 * ```mkdir install```
 * ```cmake -B build -S . -DCMAKE_INSTALL_PREFIX=install```
+
   Facing following error while running the above:
   ```
   CMake Error at CMakeLists.txt:43 (find_package):
