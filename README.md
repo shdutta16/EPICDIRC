@@ -173,13 +173,19 @@
 
   **Installing podio**
 
-  Got the following error while trying to run ```cmake -DCMAKE_INSTALL_PREFIX=/home/shubhamdutta/Applications/Package_install/podio /home/shubhamdutta/Applications/Package_source/podio```
+  Got the following error while trying to run
+  ```cmake -DCMAKE_INSTALL_PREFIX=/home/shubhamdutta/Applications/Package_install/podio /home/shubhamdutta/Applications/Package_source/podio```
   ```
   CMake Error at CMakeLists.txt:115 (message):
   You are trying to build podio against a version of ROOT that has not been
   built with a sufficient c++ standard.  podio requires c++20 or higher
   ```
-  Tried building the exisiting Root (v6.28.06) with C++20 by running: ```cmake -DCMAKE_INSTALL_PREFIX="/home/shubhamdutta/Applications/Package_install/root-6.28.06" -DGSL_CONFIG_EXECUTABLE="/home/shubhamdutta/Applications/Package_install/gsl-2.7/bin/gsl-config" -DGSL_DIR="/home/shubhamdutta/Applications/Package_install/gsl-2.7" -Dbuiltin_gsl="ON" -Dgdml="ON" -Dmathmore="ON" -Dpythia8="ON" -Droofit="ON" -DCMAKE_CXX_STANDARD=20 /home/shubhamdutta/Applications/Package_source/root_v6.28.06.source/root-6.28.06```
+
+  Tried building the exisiting Root (v6.28.06) with C++20 by running:
+  ```
+  cmake -DCMAKE_INSTALL_PREFIX="/home/shubhamdutta/Applications/Package_install/root-6.28.06" -DGSL_CONFIG_EXECUTABLE="/home/shubhamdutta/Applications/Package_install/gsl-2.7/bin/gsl-config" -DGSL_DIR="/home/shubhamdutta/Applications/Package_install/gsl-2.7" -Dbuiltin_gsl="ON" -Dgdml="ON" -Dmathmore="ON" -Dpythia8="ON" -Droofit="ON" -DCMAKE_CXX_STANDARD=20 /home/shubhamdutta/Applications/Package_source/root_v6.28.06.source/root-6.28.06
+  ```
+
   Got the following error (only small excerpt shown, rest is similar):
   ```
   /home/shubhamdutta/Applications/Package_build/root-6.28.06/etc/cling/std.modulemap:69:12: error: header 'compare' not found
