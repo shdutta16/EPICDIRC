@@ -138,4 +138,40 @@
 * ```git checkout box_envelope```
 * ```mkdir install```
 * ```cmake -B build -S . -DCMAKE_INSTALL_PREFIX=install```
+  Facing following error while running the above:
+  ```
+  CMake Error at CMakeLists.txt:43 (find_package):
+  By not providing "FindDD4hep.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "DD4hep", but
+  CMake did not find one.
 
+  Could not find a package configuration file provided by "DD4hep" (requested
+  version 1.21) with any of the following names:
+
+    DD4hepConfig.cmake
+    dd4hep-config.cmake
+
+  Add the installation prefix of "DD4hep" to CMAKE_PREFIX_PATH or set
+  "DD4hep_DIR" to a directory containing one of the above files.  If "DD4hep"
+  provides a separate development package or SDK, be sure it has been
+  installed.
+
+
+  -- Configuring incomplete, errors occurred!
+  ```
+  **TL;DR -> DD4HEP package needs to be installed**
+
+  Checked DD4HEP installation requirements, it needs Boost (>=1.56)
+
+  **Installing Boost**
+  Boost is already installed, version 1.71
+
+  **Installing DD4HEP**
+  Got the following error while trying to run ```cmake -DDD4HEP_USE_GEANT4=ON -DD4HEP_IGNORE_GEANT4_TLS=True -DBoost_NO_BOOST_CMAKE=ON -DBUILD_TESTING=ON -DROOT_DIR=$ROOTSYS -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/shubhamdutta/Applications/Package_install/DD4hep-1.32.1 /home/shubhamdutta/Applications/Package_source/DD4hep-1.32.1```
+  ```
+    CMake Error at cmake/DD4hepBuild.cmake:842 (MESSAGE):
+    Geant4 was built with initial-exec, DD4hep requires 'global-dynamic'!
+    Ignore this ERROR with DD4HEP_IGNORE_GEANT4_TLS=True
+  Call Stack (most recent call first):
+  CMakeLists.txt:164 (DD4HEP_SETUP_GEANT4_TARGETS)
+  ```
