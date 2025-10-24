@@ -247,10 +247,13 @@
   Installed XRootD without issues.
 
   There were few more libraries missing, while running cmake to install Root. Installed the missing libraries:
+
   ```sudo apt install liblzma-dev libxxhash-dev liblz4-dev libgif-dev libjpeg-dev libtiff-dev libgl2ps-dev libsqlite3-dev```
 
   CMake was still taking C++17. Solution was to update gcc and g++ to version 11:
+  
   ```sudo add-apt-repository ppa:ubuntu-toolchain-r/test``` -> Add Ubuntu Toolchain PPA to the repository list
+
   ```sudo apt install gcc-11 g++-11```
   
   Make CMake use version 11 of gcc and g++:
